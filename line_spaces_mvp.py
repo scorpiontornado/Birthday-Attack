@@ -63,14 +63,15 @@ while True:
 
     # If we find a collision, we can stop
     if real_hash in all_fake_hashes or fake_hash in all_real_hashes:
+        hash = real_hash if real_hash in all_fake_hashes else fake_hash
         print(
-            f"Collision found! {real_file}.out and {fake_file}.out have the same hash: {real_hash}"
+            f"Collision found! {real_file}.out and {fake_file}.out have the same hash: {hash}"
         )
 
         with open(f"{real_file}.out", "w") as file:
-            file.writelines("\n".join(all_real_hashes[real_hash]))
+            file.writelines("\n".join(all_real_hashes[hash]))
         with open(f"{fake_file}.out", "w") as file:
-            file.writelines("\n".join(all_fake_hashes[fake_hash]))
+            file.writelines("\n".join(all_fake_hashes[hash]))
 
         break
 
