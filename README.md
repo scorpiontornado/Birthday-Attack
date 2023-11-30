@@ -9,20 +9,29 @@ Currently a pretty simple Python solution. Could improve with:
 4. Other optimisations? [Lucas](https://www.openlearning.com/u/lucasharvey-s0t5ay/blog/BirthdayAttack16Characters/) and Daniel did some dark magic to get 16 characters
 
 Timings (M2 Pro Macbook Pro):
-trailing_spaces.py (add spaces onto end of whole file):
+v1 - trailing_spaces.py (add spaces onto end of whole file):
 - 6 character matching: 0.104 s
 - 7: 1.247
 - 8: 53.566 s
 - 9: 2:03.99 m:ss
 - 10: (killed my RAM)
 
-Versions:
+v2 - line_spaces_mvp.py (add 0 or 1 space to each line):
+- 6 character matching: 0.42 s
+- 7: 0.208
+- 8: 1.860
+- 9: 5.020
+- 10: 8.111
+- 11: 19.346
+- 12: (didn't finish - probably not enough combinations to find a collision)
+
+Versions (oldest to newest):
 - trailing_spaces.py (previously main.py): add spaces to end of files
 - line_spaces_mvp.py: add 0 or 1 spaces to the end of each line rather than the end of files (improvement 2.)
 
 Planned:
-- line_spaces_naive.py: same as line_spaces_naive.py, but adds support for when there aren't enough lines to find the collision (add >0 spaces onto the end of each line, rather than 0 or 1). Will do by using mask = i // combs, then spaces = i % combs, where i is the loop counter and combs is lines^2 (i.e. either 0 or 1 spaces, then either 0 or 2 spaces, then either 0 or 3 spaces etc.)
-- line_spaces_multiple.py: improved version of line_spaces_naive.py. Solves the issue that you'll rapidly get a large number of spaces on the end of each line, and each line always will have 0 or X spaces, where X is a positive integer. Will add support for files with any non-negative number of spaces on each line.
+- line_spaces_v2.py: same as line_spaces_mvp.py, but adds support for when there aren't enough lines to find the collision (add >0 spaces onto the end of each line, rather than 0 or 1). Will do by using a naive approach: mask = i // combs, then spaces = i % combs, where i is the loop counter and combs is lines^2 (i.e. either 0 or 1 spaces, then either 0 or 2 spaces, then either 0 or 3 spaces etc.).
+- line_spaces_v3.py: improved version of line_spaces_v2.py. Solves the issue that you'll rapidly get a large number of spaces on the end of each line, and each line always will have 0 or X spaces, where X is a positive integer. Will add support for files with any non-negative number of spaces on each line.
 
 ## Birthday Attack
 

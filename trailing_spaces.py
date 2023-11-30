@@ -48,16 +48,15 @@ while True:
     # If we find a collision, we can stop
     #! Note - this should be way faster than their approach of making sets of keys & checking len(intersection)x
     if real_hash in all_fake_hashes or fake_hash in all_real_hashes:
-        # print(f"Collision found! {real} and {all_fake_hashes[real_hash]} have the same hash {real_hash}")
-        # print(f"Collision found! {real} and {fake} have the same hash {real_hash}")
+        hash = real_hash if real_hash in all_fake_hashes else fake_hash
         print(
-            f"Collision found! 'confession_real.txt.out' and 'confession_fake.txt.out' have the same hash: {real_hash}"
+            f"Collision found! 'confession_real.txt.out' and 'confession_fake.txt.out' have the same hash: {hash}"
         )
 
         with open(f"{real_file}.out", "w") as file:
-            file.write(all_real_hashes[real_hash])
+            file.write(all_real_hashes[hash])
         with open(f"{fake_file}.txt.out", "w") as file:
-            file.write(all_fake_hashes[fake_hash])
+            file.write(all_fake_hashes[hash])
 
         break
 
