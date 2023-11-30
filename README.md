@@ -3,17 +3,26 @@ From the [Open Learning page](https://www.openlearning.com/unswcyber/courses/sec
 Code inspired by Yash Dudam ([OL post](https://www.openlearning.com/u/yashdudam-s0swsx/blog/BirthdayAttack/), [GitHub](https://github.com/YashDudam/birthday-attack/blob/main/birthday_attack.py))
 
 Currently a pretty simple Python solution. Could improve with:
-- [Multiprocessing](https://www.openlearning.com/u/liamsmith-s124mp/blog/BirthdayAttack/)/multithreading
-- Put (or don't put) a single space at the end of each line for a more normal looking output - each line essentially becomes a bit (0/1 for off/on for no space/space)
-- Using a faster language, e.g C++ or Rust
-- Other optimisations? [Lucas](https://www.openlearning.com/u/lucasharvey-s0t5ay/blog/BirthdayAttack16Characters/) and Daniel did some dark magic to get 16 characters
+1. [Multiprocessing](https://www.openlearning.com/u/liamsmith-s124mp/blog/BirthdayAttack/)/multithreading
+2. Put (or don't put) a single space at the end of each line for a more normal looking output - each line essentially becomes a bit (0/1 for off/on for no space/space)
+3. Using a faster language, e.g C++ or Rust
+4. Other optimisations? [Lucas](https://www.openlearning.com/u/lucasharvey-s0t5ay/blog/BirthdayAttack16Characters/) and Daniel did some dark magic to get 16 characters
 
 Timings (M2 Pro Macbook Pro):
+trailing_spaces.py (add spaces onto end of whole file):
 - 6 character matching: 0.104 s
 - 7: 1.247
 - 8: 53.566 s
 - 9: 2:03.99 m:ss
 - 10: (killed my RAM)
+
+Versions:
+- trailing_spaces.py (previously main.py): add spaces to end of files
+- line_spaces_mvp.py: add 0 or 1 spaces to the end of each line rather than the end of files (improvement 2.)
+
+Planned:
+- line_spaces_naive.py: same as line_spaces_naive.py, but adds support for when there aren't enough lines to find the collision (add >0 spaces onto the end of each line, rather than 0 or 1). Will do by using mask = i // combs, then spaces = i % combs, where i is the loop counter and combs is lines^2 (i.e. either 0 or 1 spaces, then either 0 or 2 spaces, then either 0 or 3 spaces etc.)
+- line_spaces_multiple.py: improved version of line_spaces_naive.py. Solves the issue that you'll rapidly get a large number of spaces on the end of each line, and each line always will have 0 or X spaces, where X is a positive integer. Will add support for files with any non-negative number of spaces on each line.
 
 ## Birthday Attack
 
