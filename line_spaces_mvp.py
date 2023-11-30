@@ -29,18 +29,18 @@ num_chars = int(sys.argv[3])
 # Read in the input files as lists of lines
 with open(real_file) as file:
     real_og = (
-        file.readlines()
+        file.read().splitlines()
     )  # TODO fix issue with this containing the newlines. Might have to .read().splitlines()
     real_modified = real_og.copy()
 with open(fake_file) as file:
-    fake_og = file.readlines()
+    fake_og = file.read().splitlines()
     fake_modified = fake_og.copy()
 
-# TODO remove - testing
-pp = pprint.PrettyPrinter()
-for item in [real_og, real_modified, fake_og, fake_modified]:
-    pp.pprint(item)
-    print()
+# # TODO remove - testing
+# pp = pprint.PrettyPrinter()
+# for item in [real_og, real_modified, fake_og, fake_modified]:
+#     pp.pprint(item)
+#     print()
 
 # We want to store all the hashes we've calculated so far. If we find a collision, we can quickly look up the corresponding text value that produced it
 # In Python, dictionaries are implemented as hash tables, so lookups are O(1) on average
@@ -68,9 +68,9 @@ while True:
         )
 
         with open(f"{real_file}.out", "w") as file:
-            file.writelines(all_real_hashes[real_hash])
+            file.writelines("\n".join(all_real_hashes[real_hash]))
         with open(f"{fake_file}.out", "w") as file:
-            file.writelines(all_fake_hashes[fake_hash])
+            file.writelines("\n".join(all_fake_hashes[fake_hash]))
 
         break
 
@@ -84,7 +84,7 @@ while True:
         * (
             (i >> j) & 1
         )  # Extract the jth bit (0-indexed from right), and add that many spaces (0 or 1)
-        for j, line in enumerate(real_modified.copy())
+        for j, line in enumerate(real_og)
     ]
     fake_modified = [
         line
@@ -92,6 +92,6 @@ while True:
         * (
             (i >> j) & 1
         )  # Extract the jth bit (0-indexed from right), and add that many spaces (0 or 1)
-        for j, line in enumerate(fake_modified.copy())
+        for j, line in enumerate(fake_og)
     ]
     i += 1
