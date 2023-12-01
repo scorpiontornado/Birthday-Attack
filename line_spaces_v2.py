@@ -94,9 +94,11 @@ while True:
     # Note - have to store in an array 
     real_mask = i % real_combs
     fake_mask = i % fake_combs
-    print(i)
-    print("\t", real_mask, bin(real_mask), real_combs, i // real_combs + 1)
-    print("\t", fake_mask, bin(fake_mask), fake_combs, i // fake_combs + 1)
+    
+    # TODO remove - debugging
+    # print(i)
+    # print("\t", real_mask, bin(real_mask), real_combs, i // real_combs + 1)
+    # print("\t", fake_mask, bin(fake_mask), fake_combs, i // fake_combs + 1)
 
     # (Could this be optimised? e.g. only modify the relevant lines)
     real_modified = [

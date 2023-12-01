@@ -8,23 +8,6 @@ Currently a pretty simple Python solution. Could improve with:
 3. Using a faster language, e.g C++ or Rust
 4. Other optimisations? [Lucas](https://www.openlearning.com/u/lucasharvey-s0t5ay/blog/BirthdayAttack16Characters/) and Daniel did some dark magic to get 16 characters
 
-Timings (M2 Pro Macbook Pro):
-v1 - trailing_spaces.py (add spaces onto end of whole file):
-- 6 character matching: 0.104 s
-- 7: 1.247
-- 8: 53.566 s
-- 9: 2:03.99 m:ss
-- 10: (killed my RAM)
-
-v2 - line_spaces_mvp.py (add 0 or 1 space to each line):
-- 6 character matching: 0.42 s
-- 7: 0.208
-- 8: 1.860
-- 9: 5.020
-- 10: 8.111
-- 11: 19.346
-- 12: (didn't finish - probably not enough combinations to find a collision)
-
 Versions (oldest to newest):
 - trailing_spaces.py (previously main.py): add spaces to end of files
 - line_spaces_mvp.py: add 0 or 1 spaces to the end of each line rather than the end of files (improvement 2.)
@@ -33,7 +16,55 @@ Planned:
 - line_spaces_v2.py: same as line_spaces_mvp.py, but adds support for when there aren't enough lines to find the collision (add >0 spaces onto the end of each line, rather than 0 or 1). Will do by using a naive approach: mask = i // combs, then spaces = i % combs, where i is the loop counter and combs is lines^2 (i.e. either 0 or 1 spaces, then either 0 or 2 spaces, then either 0 or 3 spaces etc.).
 - line_spaces_v3.py: improved version of line_spaces_v2.py. Solves the issue that you'll rapidly get a large number of spaces on the end of each line, and each line always will have 0 or X spaces, where X is a positive integer. Will add support for files with any non-negative number of spaces on each line.
 
-## Birthday Attack
+## Timings
+All done on an M2 Pro MacBook Pro, using the unix "time" command and recording total time. If I wanted to be more scientific, I'd do repeat trials and control for other factors (e.g. free RAM, other programs being used)
+
+### confessions_real/fake.txt
+v1 - trailing_spaces.py (add spaces onto end of whole file):
+- 6 characters matching: 0.104 s
+- 7: 1.247
+- 8: 53.566 s
+- 9: 2:03.99 m:ss
+- 10: (killed my RAM)
+
+v2 - line_spaces_mvp.py (add 0 or 1 space to each line):
+- 6 characters matching: 0.42 s
+- 7: 0.208
+- 8: 1.860
+- 9: 5.020
+- 10: 8.111
+- 11: 19.346
+- 12: (didn't finish - probably not enough combinations to find a collision)
+
+v3 - line_spaces_v2.py (add 0 or a consistent positive number of spaces to each line):
+- 6 characters matching: 0.139 s
+- 7: 0.250
+- 8: 2.184
+- 9: 5.987
+- 10: 10.032
+- 11: 23.735
+
+### short_real/fake.txt
+Only 3 and 4 lines, respectively. Not many combinations available for adding a space to the end of each line, to make the issue with line_spaces_mvp.py more apparent.
+v1 - trailing_spaces.py:
+- 2: 0.058
+- 4: 0.045
+- 8: 43.022
+- 9: 1:48.69
+- 10: 2:39.44
+
+v2 - line_spaces_mvp.py:
+- 1: 0.063
+- 2: (hung, tried for 3m 21s then Ctrl+C'd - prob exhausted all combinations of 0/1 spaces each line)
+
+v3 - line_spaces_v2.py:
+- 2: 0.064
+- 4: 0.056
+- 8: 0.099
+- 9: 14.687
+- 10: 1:10.81
+
+## Birthday Attack (Task Description)
 
 When hashes are used assure the integrity of a message what could be very bad is if attackers could find or create collisions with a feasible amount of work.  
 
