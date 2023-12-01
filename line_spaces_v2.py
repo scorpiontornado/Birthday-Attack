@@ -14,7 +14,7 @@
 
 import sys
 from hashlib import sha256
-import pprint  #! Testing
+# import pprint  #! Testing
 
 if len(sys.argv) != 4:
     print(f"Usage: {sys.argv[0]} <real_file> <fake_file> <num_chars>")
